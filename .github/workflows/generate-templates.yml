@@ -18,6 +18,11 @@ jobs:
       with:
         python-version: '3.9'
 
+    - name: Generate inventory
+      run: |
+        python parse_input.py
+        if [ ! -f inventory.yaml ]; then echo "inventory_hosts: []" > inventory.yaml; fi
+ 
     - name: Install dependencies
       run: pip install pyyaml ansible
 
