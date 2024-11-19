@@ -13,7 +13,7 @@
     - name: Create templates for each host
       template:
         src: templates/template.j2
-        dest: "configs/{{ hostname }}.conf"
+        dest: "configs/{{ item.hostname }}.conf"
       loop: "{{ inventory_hosts }}"
       loop_control:
-        label: "{{ hostname }}"
+        label: "{{ item.hostname }}"

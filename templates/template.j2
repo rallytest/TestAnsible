@@ -1,9 +1,4 @@
-# Configuration for {{ hostname }}
-{% if ip %}
-IP Address: {{ ip }}
-{% endif %}
-Hostname: {{ hostname }}
-{% if location %}
-Location: {{ location }}
-{% endif %}
+# Configuration for {{ item.hostname }}
+IP Address: {{ item.ip }}
+Location: {{ item.location | default('N/A') }}
 
