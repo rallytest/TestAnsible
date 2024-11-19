@@ -1,0 +1,13 @@
+---
+- name: Generate configuration templates
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - inventory.yaml
+  tasks:
+    - name: Create templates for each host
+      template:
+        src: template.j2
+        dest: "configs/{{ item.hostname }}.conf"
+      loop: "{{ hosts }}"
+
