@@ -1,29 +1,19 @@
-import csv
 import yaml
+import csv
 
 def parse_input(input_file, output_file):
-    inventory = {"hosts": []}
-    with open(input_file, "r") as f:
-        reader = csv.reader(f)
+    inventory_hosts = []
+    with open(input_file, 'r') as csvfile:
+        reader = csv.DictReader(csvfile)
         for row in reader:
-            # Skip invalid rows
-            if len(row) < 2:
-                print(f"Skipping invalid row: {row}")
-                continue
-            
-            # Strip whitespace and construct inventory entry
-            entry = {
-                "ip": row[0].strip(),
-                "hostname": row[1].strip()
-            }
-            if len(row) > 2:  # Optional location
-                entry["location"] = row[2].strip()
-            inventory["hosts"].append(entry)
-    
-    # Save inventory as YAML
-    with open(output_file, "w") as f:
-        yaml.dump(inventory, f)
+            inventory_hosts.append({
+                "ip": row.get("ip", "").strip(),
+                "hostname": row.get("hostname", "").strip(),
+                "location": row.get("location", "").strip()
+            })
 
-# Example usage
+    with open(output_file, 'w') as yamlfile:
+        yaml.dump({"inventory_hosts": inventory_hosts}, yamlfile, default_flow_style=False)
+
 parse_input("input.csv", "inventory.yaml")
 
