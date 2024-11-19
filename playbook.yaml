@@ -7,7 +7,9 @@
   tasks:
     - name: Create templates for each host
       template:
-        src: template.j2
+        src: templates/template.j2
         dest: "configs/{{ item.hostname }}.conf"
-      loop: "{{ hosts }}"
+      loop: "{{ inventory_hosts }}"
+      loop_control:
+        label: "{{ item.hostname }}"
 

@@ -6,21 +6,21 @@ def parse_input(input_file, output_file):
     with open(input_file, "r") as f:
         reader = csv.reader(f)
         for row in reader:
-            # Skip empty rows or rows with insufficient columns
+            # Skip invalid rows
             if len(row) < 2:
                 print(f"Skipping invalid row: {row}")
                 continue
             
+            # Strip whitespace and construct inventory entry
             entry = {
-                "ip": row[0],
-                "hostname": row[1]
+                "ip": row[0].strip(),
+                "hostname": row[1].strip()
             }
-            # Add location if available
-            if len(row) > 2:
-                entry["location"] = row[2]
-            
+            if len(row) > 2:  # Optional location
+                entry["location"] = row[2].strip()
             inventory["hosts"].append(entry)
     
+    # Save inventory as YAML
     with open(output_file, "w") as f:
         yaml.dump(inventory, f)
 
