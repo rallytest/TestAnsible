@@ -18,7 +18,7 @@ def parse_input(input_file, output_file):
             }
             if len(row) > 2:  # Optional location
                 entry["location"] = row[2].strip()
-            inventory["hosts"].append(entry)
+            inventory["inventory_hosts"].append(entry)
 
     # Save inventory as YAML
     with open(output_file, "w") as f:
