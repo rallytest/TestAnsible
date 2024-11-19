@@ -16,4 +16,4 @@
         dest: "configs/{{ hostname }}.conf"
       loop: "{{ inventory_hosts }}"
       loop_control:
-        label: "{{ item.hostname }}"
+        label: "{{ hostname }}"
