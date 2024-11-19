@@ -10,6 +10,11 @@
       debug:
         var: inventory_hosts
 
+    - name: Ensure the configs directory exists
+      file:
+        path: configs
+        state: directory
+
     - name: Create templates for each host
       template:
         src: templates/template.j2
@@ -17,3 +22,4 @@
       loop: "{{ inventory_hosts }}"
       loop_control:
         label: "{{ item.hostname }}"
+
