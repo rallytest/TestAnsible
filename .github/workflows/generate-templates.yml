@@ -29,6 +29,8 @@ jobs:
       run: |
         python parse_input.py
         if [ ! -f inventory.yaml ]; then echo "inventory_hosts: []" > inventory.yaml; fi
+        ls -l inventory.yaml
+        cat inventory.yaml
 
     - name: Run Ansible playbook
       run: |
