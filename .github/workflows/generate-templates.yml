@@ -37,3 +37,8 @@ jobs:
       run: |
         ansible-playbook -i /home/runner/work/TestAnsible/TestAnsible/inventory.yaml playbook.yaml -vvv
 
+    - name: Upload Generated Files as Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: generated-configs
+        path: configs/
