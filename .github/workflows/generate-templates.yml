@@ -1,0 +1,31 @@
+name: Generate Templates
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-templates:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: pip install pyyaml ansible
+
+    - name: Parse input and generate inventory
+      run: |
+        python parse_input.py
+
+    - name: Run Ansible playbook
+      run: |
+        ansible-playbook playbook.yaml
+
